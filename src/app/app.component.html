@@ -1,0 +1,7 @@
+<app-header *ngIf="authService.user$ | async"></app-header>
+
+<main [class.authenticated]="authService.user$ | async">
+  <router-outlet></router-outlet>
+</main>
+
+<app-loader *ngIf="loadingService.isLoading$ | async"></app-loader>

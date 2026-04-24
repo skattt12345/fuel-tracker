@@ -1,0 +1,121 @@
+<div class="settings-container" [class.active]="vehicle.isInstitute">
+  <div class="toggle-header">
+    <div class="info">
+      <span class="title">Методика Інституту </span>
+      <p class="subtitle">Лінійні норми та калькулятор пробігу</p>
+    </div>
+    <label class="switch">
+      <input
+        type="checkbox"
+        [(ngModel)]="vehicle.isInstitute"
+        (change)="onToggle()"
+      />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <div class="settings-form" *ngIf="vehicle.isInstitute">
+    <div class="input-grid">
+      <div class="field">
+        <label>Лінійна норма, л/100км</label>
+        <input
+          type="number"
+          [(ngModel)]="vehicle.linearNorm"
+          (input)="onInputChange()"
+          step="0.1"
+        />
+      </div>
+      <div class="field">
+        <label>Прогрів (л/хв)</label>
+        <input
+          type="number"
+          [(ngModel)]="vehicle.warmupRate"
+          (input)="onInputChange()"
+          step="0.001"
+        />
+      </div>
+    </div>
+
+    <div class="trip-distribution">
+      <div class="dist-info">
+        <span
+          >Розподіл дистанції: <strong>{{ distance }} км</strong></span
+        >
+        <span class="badge" [class.ok]="remainingKm === 0">
+          Залишок: {{ remainingKm }} км
+        </span>
+      </div>
+
+      <div class="segments-inputs">
+        <div class="seg-field">
+          <label>Траса (-5%)</label>
+          <div class="input-with-action">
+            <input
+              type="number"
+              [(ngModel)]="calcParams.segments.highway"
+              (input)="onInputChange()"
+              placeholder="0"
+            />
+            <button class="bolt-btn" (click)="fillRemainder('highway')">
+              ⚡️
+            </button>
+          </div>
+        </div>
+
+        <div class="seg-field">
+          <label>Міста (+5%)</label>
+          <div class="input-with-action">
+            <input
+              type="number"
+              [(ngModel)]="calcParams.segments.otherCity"
+              (input)="onInputChange()"
+              placeholder="0"
+            />
+            <button class="bolt-btn" (click)="fillRemainder('otherCity')">
+              ⚡️
+            </button>
+          </div>
+        </div>
+
+        <div class="seg-field">
+          <label>Ужгород (+10%)</label>
+          <div class="input-with-action">
+            <input
+              type="number"
+              [(ngModel)]="calcParams.segments.uzhhorod"
+              (input)="onInputChange()"
+              placeholder="0"
+            />
+            <button class="bolt-btn" (click)="fillRemainder('uzhhorod')">
+              ⚡️
+            </button>
+          </div>
+        </div>
+
+        <div class="seg-field">
+          <label>Київ/Львів (+15%)</label>
+          <div class="input-with-action">
+            <input
+              type="number"
+              [(ngModel)]="calcParams.segments.largeCity"
+              (input)="onInputChange()"
+              placeholder="0"
+            />
+            <button class="bolt-btn" (click)="fillRemainder('largeCity')">
+              ⚡️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field mt-10">
+        <label>Прогрів (хвилини):</label>
+        <input
+          type="number"
+          [(ngModel)]="calcParams.warmupMinutes"
+          (input)="onInputChange()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

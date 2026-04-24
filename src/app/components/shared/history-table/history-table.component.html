@@ -1,0 +1,93 @@
+<div class="table-wrapper">
+  <div class="pagination-controls" *ngIf="data.length > pageSize">
+    <button
+      class="btn-page"
+      [disabled]="currentPage === 1"
+      (click)="changePage(currentPage - 1)"
+    >
+      ← Назад
+    </button>
+
+    <span class="page-info">
+      Сторінка <strong>{{ currentPage }}</strong> з {{ totalPages }}
+    </span>
+
+    <button
+      class="btn-page"
+      [disabled]="currentPage === totalPages"
+      (click)="changePage(currentPage + 1)"
+    >
+      Вперед →
+    </button>
+  </div>
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Дата / Час</th>
+        <th *ngIf="isGlobal">Автомобіль</th>
+        <th>№ Листа</th>
+        <th *ngIf="!isGlobal">Пробіг (До → Після)</th>
+        <th>Відстань</th>
+        <th>Заправка</th>
+        <th>Витрата</th>
+        <th *ngIf="!isGlobal">Залишок</th>
+        <th>Хто заповнив</th>
+        <th *ngIf="showActions && (authService.isAdmin$ | async)">Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of paginatedData">
+        <td>
+          <div class="datetime-container">
+            <span class="main-text">{{ row.date }}</span>
+            <span class="muted-text small">{{ row.time }}</span>
+          </div>
+        </td>
+
+        <td *ngIf="isGlobal">
+          <strong>{{ row.vehicleName || "—" }}</strong>
+          <div class="small muted-text">{{ row.vehiclePlate }}</div>
+        </td>
+        <td>
+          <span class="sheet-badge">{{ row.sheetNumber || "—" }}</span>
+        </td>
+        <td *ngIf="!isGlobal">
+          {{ row.mileageBefore }} → {{ row.mileageAfter }}
+        </td>
+        <td>
+          <strong>+{{ row.distance }} км</strong>
+        </td>
+        <td class="success-text">
+          <strong>{{
+            row.fuelAdded > 0 ? "+" + row.fuelAdded + " л" : "—"
+          }}</strong>
+        </td>
+        <td class="warning-text">-{{ row.fuelUsed | number: "1.0-1" }} л</td>
+        <td *ngIf="!isGlobal">
+          <strong>{{ row.fuelLeft | number: "1.0-1" }} л</strong>
+        </td>
+        <td>
+          <span class="author-badge">{{ row.createdBy || "Водій" }}</span>
+        </td>
+        <td *ngIf="authService.isAdmin$ | async">
+          <div class="actions">
+            <button
+              class="btn-icon edit"
+              (click)="onEdit(row)"
+              title="Редагувати"
+            >
+              ✎
+            </button>
+            <button
+              class="btn-icon delete"
+              (click)="onDelete(row)"
+              title="Видалити"
+            >
+              ✕
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

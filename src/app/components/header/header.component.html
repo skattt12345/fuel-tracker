@@ -1,0 +1,180 @@
+<header class="main-header">
+  <div class="nav-container">
+    <div class="logo-section" routerLink="/">
+      <div class="logo-icon">⛽</div>
+      <div class="logo-text">
+        <span class="brand">FuelTracker</span>
+        <span class="user-name" *ngIf="authService.user$ | async as user">
+          | {{ user.displayName }}
+        </span>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <button class="add-btn-modern" (click)="openAddModal()">
+        <span class="plus-icon">+</span>
+        <span class="btn-text">Додати авто</span>
+      </button>
+
+      <div class="controls-group">
+        <button
+          class="theme-btn"
+          (click)="toggleTheme()"
+          [title]="isDarkMode ? 'Світла тема' : 'Темна тема'"
+        >
+          <span class="icon">{{ isDarkMode ? "☀️" : "🌙" }}</span>
+        </button>
+
+        <button class="logout-btn" (click)="authService.logout()" title="Вийти">
+          <span class="logout-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 21V3h8a2 2 0 0 1 2 2v14" />
+              <path d="M9 12h7" />
+              <path d="M13 8l4 4-4 4" />
+            </svg>
+          </span>
+          <span class="logout-text">Вийти</span>
+        </button>
+
+        <button
+          class="menu-btn"
+          (click)="isMenuOpen = !isMenuOpen"
+          [class.active]="isMenuOpen"
+        >
+          <div class="burger-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" [class.show]="isMenuOpen">
+    <div class="menu-links">
+      <a routerLink="/" (click)="isMenuOpen = false">🏠 Головна</a>
+      <a routerLink="/statistics" (click)="closeMenu()">Статистика</a>
+      <a (click)="authService.logout(); isMenuOpen = false" class="logout-link"
+        >🚪 Вийти</a
+      >
+    </div>
+  </nav>
+</header>
+
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+  <div class="modal-card modern-popup" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Нова одиниця техніки 🚒</h2>
+      <button class="close-x" (click)="closeModal()">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label>Марка та модель</label>
+          <input
+            type="text"
+            [(ngModel)]="newVehicle.name"
+            placeholder="Skoda Octavia"
+            class="modal-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Державний номер</label>
+          <input
+            type="text"
+            [(ngModel)]="newVehicle.plate"
+            placeholder="AO 0000 EE"
+            class="modal-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Тип пального</label>
+          <select [(ngModel)]="newVehicle.fuelType" class="modal-input">
+            <option value="ДП">ДП (Дизель)</option>
+            <option value="А-95">А-95 (Бензин)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Пробіг (км)</label>
+          <input
+            type="number"
+            [(ngModel)]="newVehicle.mileage"
+            class="modal-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Залишок пального (л)</label>
+          <input
+            type="number"
+            [(ngModel)]="newVehicle.fuelLeft"
+            class="modal-input"
+          />
+        </div>
+
+        <div class="form-group full-width">
+          <label>Середній розхід (л/100км)</label>
+          <input
+            type="number"
+            [(ngModel)]="newVehicle.consumption"
+            class="modal-input"
+          />
+        </div>
+        <div class="form-group full-width institute-toggle-group">
+          <label class="checkbox-label">
+            <input type="checkbox" [(ngModel)]="newVehicle.isInstitute" />
+            <span>Використовувати методику Інституту (Наказ №432)</span>
+          </label>
+        </div>
+
+        <div
+          class="form-grid"
+          *ngIf="newVehicle.isInstitute"
+          style="width: 100%; grid-column: span 2"
+        >
+          <div class="form-group">
+            <label>Лінійна норма (Hl)</label>
+            <input
+              type="number"
+              [(ngModel)]="newVehicle.linearNorm"
+              placeholder="Наприклад: 6.8"
+              class="modal-input"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Холостий хід (л/хв)</label>
+            <input
+              type="number"
+              step="0.001"
+              [(ngModel)]="newVehicle.warmupRate"
+              placeholder="Наприклад: 0.006"
+              class="modal-input"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel-modern" (click)="closeModal()">
+        Скасувати
+      </button>
+      <button class="btn-confirm-modern" (click)="saveNewVehicle()">
+        Зберегти авто
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<ng-container *ngIf="{ user: authService.user$ | async } as auth">
+  <div class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo-icon">🚒</div>
+        <h1>Fuel Tracker</h1>
+        <p>Керування технікою ДСНС</p>
+      </div>
+
+      <div class="auth-body">
+        <div *ngIf="!auth.user; else welcomeTemplate">
+          <button class="google-btn" (click)="login()">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+              alt="G"
+            />
+            Увійти через Google
+          </button>
+        </div>
+
+        <ng-template #welcomeTemplate>
+          <div class="welcome-container">
+            <img [src]="auth.user?.photoURL" class="user-avatar" alt="Avatar" />
+            <h3>Вітаємо, {{ auth.user?.displayName }}!</h3>
+            <p>Завантаження даних автопарку...</p>
+            <div class="loader-mini"></div>
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="auth-footer">
+        <span>Закарпаття 2026</span>
+      </div>
+    </div>
+  </div>
+</ng-container>

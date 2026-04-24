@@ -1,0 +1,125 @@
+<div class="main-container">
+  <div class="header-section">
+    <h1>
+      Список машин
+      <span class="count-badge">{{ filteredVehicles.length }} од.</span>
+    </h1>
+    <div class="search-wrapper">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (input)="filterVehicles()"
+        placeholder="Пошук за назвою або номером..."
+        class="modern-search"
+      />
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <div class="vehicle-grid">
+    <div
+      *ngFor="let car of filteredVehicles"
+      class="vehicle-card"
+      [routerLink]="['/vehicle', car.id]"
+    >
+      <div class="admin-controls">
+        <button
+          class="action-btn info-btn"
+          (click)="openInfo($event, car)"
+          title="Технічні дані"
+        >
+          <svg
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            fill="none"
+            class="info-icon-svg"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M12 16v-4M12 8h.01"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+
+        <button
+          class="action-btn delete-btn"
+          (click)="removeVehicle($event, car)"
+          title="Видалити авто"
+          *ngIf="authService.isAdmin$ | async"
+        >
+          <svg
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10 11v6m4-6v6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="card-header">
+        <div class="title-area">
+          <h3>{{ car.name }}</h3>
+          <span class="plate-number">{{ car.plate }}</span>
+        </div>
+        <div class="status-dot" [class.active]="car.mileage > 0"></div>
+      </div>
+
+      <div class="card-body">
+        <div class="stat-row">
+          <div class="stat-item">
+            <span class="stat-label">Пробіг</span>
+            <span class="stat-value">{{ car.mileage }} <small>км</small></span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Залишок</span>
+            <span class="stat-value" [class.low-fuel]="car.fuelLeft < 5">
+              {{ car.fuelLeft | number: "1.0-1" }} <small>л</small>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <button class="btn-action">
+          Вибрати цю машину
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-vehicle-info
+  *ngIf="selectedVehicle"
+  [vehicle]="selectedVehicle"
+  [isAdmin]="(authService.isAdmin$ | async) || false"
+  (close)="selectedVehicle = null"
+  (updated)="onVehicleUpdated()"
+>
+</app-vehicle-info>

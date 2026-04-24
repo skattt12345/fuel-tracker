@@ -1,0 +1,300 @@
+.main-container {
+  padding: 36px 18px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  min-height: calc(100vh - 110px);
+}
+
+/* ШАПКА ТА ПОШУК */
+.header-section {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.header-section h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+
+.count-badge {
+  background: rgba(0, 123, 255, 0.14);
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  padding: 6px 14px;
+  border-radius: 999px;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.modern-search {
+  width: 100%;
+  padding: 16px 18px 16px 48px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--text-main);
+  font-size: 16px;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.modern-search:focus {
+  outline: none;
+  border-color: rgba(0, 123, 255, 0.28);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.65;
+  font-size: 1rem;
+}
+
+/* СІТКА КАРТОК (Адаптивність) */
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding-bottom: 42px;
+}
+
+/* КАРТКА */
+.vehicle-card {
+  background: var(--card-bg);
+  border-radius: 28px;
+  padding: 20px;
+  position: relative;
+  border: 1px solid rgba(221, 221, 221, 0.82);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.16);
+  border-color: rgba(0, 123, 255, 0.18);
+}
+
+.vehicle-card:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12);
+}
+
+/* КНОПКА ВИДАЛЕННЯ */
+.delete-btn {
+  background: rgba(220, 53, 69, 0.12);
+  border: none;
+  color: var(--warning-color);
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.05);
+  background: var(--warning-color);
+  color: white;
+}
+
+/* ДАНІ АВТО */
+.card-header {
+  margin-bottom: 18px;
+  padding-right: 44px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.plate-number {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  background: rgba(0, 123, 255, 0.08);
+  padding: 6px 12px;
+  border-radius: 999px;
+  display: inline-flex;
+  margin-top: 10px;
+}
+
+.stat-row {
+  display: flex;
+  background: rgba(243, 244, 246, 0.95);
+  padding: 16px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  gap: 16px;
+}
+
+:host-context([data-theme="dark"]) .stat-row {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.stat-item {
+  flex: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+:host-context([data-theme="dark"]) .stat-label {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-main);
+}
+
+.stat-item:nth-child(2) .stat-value {
+  color: #28a745;
+}
+
+:host-context([data-theme="dark"]) .stat-value {
+  color: #ffffff;
+}
+
+:host-context([data-theme="dark"]) .stat-item:nth-child(2) .stat-value {
+  color: #7dda7a;
+}
+
+.low-fuel {
+  color: var(--warning-color);
+}
+
+/* КНОПКА ДІЇ */
+.btn-action {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-color), #1a7cff);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 14px 26px rgba(0, 123, 255, 0.18);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.btn-action:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+
+.btn-action:active {
+  transform: translateY(0);
+}
+
+/* АДАПТИВНІСТЬ ДЛЯ МОБІЛОК */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 24px 12px 36px;
+  }
+
+  .header-section h1 {
+    font-size: 1.7rem;
+  }
+
+  .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-row {
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .count-badge {
+    display: inline-block;
+    margin-top: 6px;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .btn-action {
+    padding: 16px;
+  }
+}
+.info-btn {
+  /* Твої існуючі стилі кнопки */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* Видаляємо паддінг, щоб контролювати розмір іконки в HTML */
+  overflow: hidden; /* Щоб іконка не вилазила */
+  background: none; /* Видаляємо фон кнопки, бо іконка вже з фоном */
+  border: none;
+}
+
+/* Базовий стиль для іконки */
+.info-icon-svg {
+  /* За замовчуванням (світла тема) колір буде синім */
+  color: #007bff;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+/* Коли активна темна тема, міняємо колір на світлий */
+[data-theme="dark"] .info-icon-svg {
+  /* text-main у тебе світлий у темній темі, або primary-color */
+  color: var(--text-main);
+}
+
+/* Опціонально: при наведенні можна міняти колір */
+.info-btn:hover .info-icon-svg {
+  color: #0056b3; /* Темніший синій при наведенні */
+}
+.admin-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: end;
+}

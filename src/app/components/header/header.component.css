@@ -1,0 +1,389 @@
+/* ================= HEADER ================= */
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 20px;
+  width: 100%;
+}
+
+/* Якщо ти не використовуєш RGB змінні, спробуй так: */
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Дві колонки */
+  gap: 15px;
+}
+
+/* Поле на всю ширину (наприклад, Назва авто) */
+.full-width {
+  grid-column: span 2;
+}
+
+/* ================= LOGO ================= */
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.sub-brand {
+  font-size: 0.7rem;
+  color: var(--primary-color);
+}
+
+/* ================= ACTIONS ================= */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px;
+  margin-right: clamp(20px, 4.5vw + 8px, 32px);
+}
+
+.add-btn-modern {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.controls-group {
+  display: flex;
+  gap: 6px;
+  background: var(--bg-color);
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.theme-btn,
+.menu-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ================= BURGER ================= */
+
+.burger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 14px;
+  width: 20px;
+}
+
+.burger-lines span {
+  height: 2px;
+  background: var(--text-main);
+  border-radius: 2px;
+}
+
+.menu-btn.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  /* ОБМЕЖЕННЯ ШИРИНИ */
+  max-width: 1200px; /* Така ж ширина, як у контейнера хедера */
+  margin: 0 auto; /* Центрування */
+
+  width: 95%; /* Щоб на зовсім маленьких екранах був невеликий відступ */
+
+  background: white;
+  border-radius: 0 0 12px 12px; /* Закруглюємо тільки нижні кути */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+
+  /* Твої існуючі анімації */
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Коли меню відкрите */
+.mobile-nav.show {
+  max-height: 300px;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 10px 0;
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-links a {
+  padding: 16px 20px;
+  text-decoration: none;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ================= MODAL ================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  /* Важливо: напівпрозорий фон для роботи блюру */
+  background: rgba(0, 0, 0, 0.3);
+
+  /* Ефект розмиття сайту на фоні */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999; /* Максимальний пріоритет, щоб перекрити хедер */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modern-popup {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  border-radius: 24px;
+  padding: 24px;
+
+  /* Прибираємо жорстку висоту, даємо margin для балансу */
+  margin: auto;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* ================= MODAL CONTENT ================= */
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  font-size: 1.3rem;
+}
+
+.close-x {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+}
+
+/* ================= BUTTONS ================= */
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-cancel-modern,
+.btn-confirm-modern {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-confirm-modern {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+}
+/* Стилізація кнопки Виходу */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background-color: rgba(217, 48, 37, 0.1);
+  color: #d93025;
+  border-color: #d93025;
+  box-shadow: 0 4px 10px rgba(217, 48, 37, 0.12);
+}
+
+.logout-btn:active {
+  transform: scale(0.95);
+}
+
+.logout-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #d93025;
+}
+
+.logout-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.logout-text {
+  display: inline-block;
+}
+
+.user-name {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  opacity: 0.7;
+  font-weight: 400;
+  margin-left: 5px;
+  white-space: nowrap; /* Щоб ім'я не розривалось на два рядки */
+}
+
+/* Адаптивність для мобілок */
+@media (max-width: 768px) {
+  .logout-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .logout-text {
+    display: none;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 600px) {
+  .main-header {
+    padding: 10px 12px;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand {
+    font-size: 0.95rem;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .add-btn-modern {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modern-popup {
+    padding: 16px;
+    margin-top: 70px;
+  }
+  .modal-overlay {
+    width: 93vw;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+}

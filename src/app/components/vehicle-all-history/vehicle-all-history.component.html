@@ -1,0 +1,63 @@
+<div class="history-page">
+  <div class="navigation-bar">
+    <h2>Загальна статистика ДСНС</h2>
+  </div>
+
+  <div class="summary-grid" *ngIf="filteredRecords.length > 0">
+    <div class="summary-item">
+      <span class="label">Витрачено ДП</span>
+      <span class="value warning-text">{{ totalFuelUsedDP.toFixed(1) }} л</span>
+    </div>
+
+    <div class="summary-item">
+      <span class="label">Витрачено А-95</span>
+      <span class="value warning-text" style="color: #e67e22"
+        >{{ totalFuelUsedA95.toFixed(1) }} л</span
+      >
+    </div>
+
+    <div class="summary-item">
+      <span class="label">Заправлено ДП</span>
+      <span class="value success-text" style="color: #22c55e"
+        >{{ totalDP.toFixed(1) }} л</span
+      >
+    </div>
+
+    <div class="summary-item">
+      <span class="label">Заправлено А-95</span>
+      <span class="value blue-text" style="color: #3b82f6"
+        >{{ totalA95.toFixed(1) }} л</span
+      >
+    </div>
+  </div>
+
+  <div class="history-card">
+    <div class="filter-section">
+      <div class="date-inputs">
+        <div class="input-group">
+          <label>З:</label>
+          <input
+            type="date"
+            [(ngModel)]="startDate"
+            (change)="applyFilters()"
+          />
+        </div>
+        <div class="input-group">
+          <label>По:</label>
+          <input type="date" [(ngModel)]="endDate" (change)="applyFilters()" />
+        </div>
+      </div>
+      <button class="btn-sort" (click)="toggleSort()">
+        {{ sortAscending ? "Старі" : "Нові" }}
+        <span class="arrow">{{ sortAscending ? "↑" : "↓" }}</span>
+      </button>
+    </div>
+
+    <app-history-table
+      [data]="filteredRecords"
+      [isGlobal]="true"
+      [showActions]="false"
+    >
+    </app-history-table>
+  </div>
+</div>

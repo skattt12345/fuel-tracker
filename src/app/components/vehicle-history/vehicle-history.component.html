@@ -1,0 +1,87 @@
+<div class="history-page">
+  <div class="navigation-bar">
+    <button class="btn-back" [routerLink]="['/vehicle', vehicle?.id]">
+      <span class="arrow">←</span> До калькулятора
+    </button>
+    <div class="title-group" *ngIf="vehicle">
+      <h2>{{ vehicle.name }}</h2>
+      <span class="plate">{{ vehicle.plate }}</span>
+    </div>
+  </div>
+
+  <div class="summary-grid" *ngIf="filteredRecords.length > 0">
+    <div class="summary-item">
+      <span class="label">Загальна відстань</span>
+      <span class="value accent-text">{{ totalDistance.toFixed(1) }} км</span>
+    </div>
+    <div class="summary-item">
+      <span class="label">Витрачено пального</span>
+      <span class="value warning-text">{{ totalFuelUsed.toFixed(1) }} л</span>
+    </div>
+    <div class="summary-item">
+      <span class="label">Всього заправлено</span>
+      <span class="value success-text">{{ totalRefueled.toFixed(1) }} л</span>
+    </div>
+  </div>
+
+  <div class="history-card">
+    <div class="filter-section">
+      <div class="date-inputs">
+        <div class="input-group">
+          <label>З:</label>
+          <input
+            type="date"
+            [(ngModel)]="startDate"
+            (change)="applyFilters()"
+          />
+        </div>
+        <div class="input-group">
+          <label>По:</label>
+          <input type="date" [(ngModel)]="endDate" (change)="applyFilters()" />
+        </div>
+      </div>
+      <button class="btn-sort" (click)="toggleSort()">
+        {{ sortAscending ? "Старі" : "Нові" }}
+        <span class="arrow">{{ sortAscending ? "↑" : "↓" }}</span>
+      </button>
+    </div>
+
+    <app-history-table
+      [data]="filteredRecords"
+      [isGlobal]="false"
+      (edit)="openEdit($event)"
+      (delete)="deleteRecord($event)"
+    >
+    </app-history-table>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showEditModal && editingRecord">
+    <div class="modal-content edit-card">
+      <h3>Редагування запису</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>№ Листа</label>
+          <input type="text" [(ngModel)]="editingRecord.sheetNumber" />
+        </div>
+        <div class="form-group">
+          <label>Пробіг ДО (км)</label>
+          <input type="number" [(ngModel)]="editingRecord.mileageBefore" />
+        </div>
+        <div class="form-group">
+          <label>Пробіг ПІСЛЯ (км)</label>
+          <input type="number" [(ngModel)]="editingRecord.mileageAfter" />
+        </div>
+        <div class="form-group">
+          <label>Заправлено (л)</label>
+          <input type="number" [(ngModel)]="editingRecord.fuelAdded" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-reset" (click)="showEditModal = false">
+          Скасувати
+        </button>
+        <button class="btn-sort save-btn" (click)="saveEdit()">Зберегти</button>
+      </div>
+    </div>
+  </div>
+</div>
