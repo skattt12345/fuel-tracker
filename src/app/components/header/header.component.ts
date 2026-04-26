@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
       fuelType: 'ДП',
       history: [],
       isInstitute: false,
-      linearNorm: 10, // зазвичай дорівнює базовому розходу
+      linearNorm: 0, // зазвичай дорівнює базовому розходу
       warmupRate: 0.006, // Додаємо порожню історію відразу
     };
   }
@@ -80,7 +80,9 @@ export class HeaderComponent implements OnInit {
       alert('Будь ласка, заповніть марку та держ. номер!');
       return;
     }
-
+    if (!this.newVehicle.isInstitute) {
+      this.newVehicle.linearNorm = this.newVehicle.consumption;
+    }
     // Розрахунок наступного ID
     const nextId =
       this.vehicles.length > 0
