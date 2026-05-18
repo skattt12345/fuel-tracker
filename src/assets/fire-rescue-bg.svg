@@ -1,0 +1,65 @@
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="240" y1="80" x2="1360" y2="1120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFF6F1"/>
+      <stop offset="0.5" stop-color="#F3F6FA"/>
+      <stop offset="1" stop-color="#E9EEF5"/>
+    </linearGradient>
+    <radialGradient id="flareTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 140) rotate(32) scale(520 300)">
+      <stop stop-color="#FF7A45" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FF7A45" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flareRight" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1320 250) rotate(145) scale(420 260)">
+      <stop stop-color="#FFB347" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#FFB347" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flareBottom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1220 980) rotate(180) scale(500 240)">
+      <stop stop-color="#B4C0D1" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#B4C0D1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chevrons" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D9472F" stop-opacity="0.09"/>
+      <stop offset="1" stop-color="#FFB347" stop-opacity="0.04"/>
+    </linearGradient>
+    <filter id="blurLarge" x="-200" y="-200" width="2000" height="1600" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="56"/>
+    </filter>
+    <filter id="blurSoft" x="-200" y="-200" width="2000" height="1600" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#bg)"/>
+  <rect width="1600" height="1200" fill="url(#flareTop)"/>
+  <rect width="1600" height="1200" fill="url(#flareRight)"/>
+  <rect width="1600" height="1200" fill="url(#flareBottom)"/>
+
+  <g opacity="0.34">
+    <path d="M-120 1140L380 640L470 730L-30 1230L-120 1140Z" fill="url(#chevrons)"/>
+    <path d="M60 1140L560 640L650 730L150 1230L60 1140Z" fill="url(#chevrons)"/>
+    <path d="M240 1140L740 640L830 730L330 1230L240 1140Z" fill="url(#chevrons)"/>
+  </g>
+
+  <g opacity="0.17">
+    <path d="M1180 130L1490 130" stroke="#C7D1DE" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1240 190L1550 190" stroke="#C7D1DE" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1120 250L1430 250" stroke="#C7D1DE" stroke-width="2" stroke-linecap="round"/>
+    <path d="M1080 310L1390 310" stroke="#C7D1DE" stroke-width="2" stroke-linecap="round"/>
+    <path d="M180 220H760" stroke="#D6DEE8" stroke-width="2" stroke-dasharray="8 12" stroke-linecap="round"/>
+    <path d="M120 280H700" stroke="#D6DEE8" stroke-width="2" stroke-dasharray="8 12" stroke-linecap="round"/>
+  </g>
+
+  <g opacity="0.18" filter="url(#blurLarge)">
+    <path d="M154 485C298 356 509 381 666 457C769 507 833 580 941 609C1068 643 1209 596 1331 650C1427 693 1492 789 1516 891C1546 1017 1510 1168 1400 1226C1265 1298 1096 1175 952 1110C827 1053 696 1030 567 1085C441 1138 325 1269 183 1245C57 1224 -17 1106 -55 991C-105 836 36 590 154 485Z" fill="#F6F9FC"/>
+  </g>
+
+  <g opacity="0.24" filter="url(#blurSoft)">
+    <path d="M880 130C969 72 1117 69 1207 125C1272 165 1301 223 1374 253C1459 290 1560 283 1625 346C1676 396 1705 473 1697 547C1687 642 1614 721 1519 749C1401 785 1279 717 1163 693C1060 671 954 684 873 752C794 818 746 934 648 949C562 962 484 894 448 815C401 713 412 577 474 487C570 349 746 217 880 130Z" fill="#FFFFFF"/>
+  </g>
+
+  <g opacity="0.18">
+    <circle cx="262" cy="164" r="7" fill="#FF7A45"/>
+    <circle cx="288" cy="164" r="7" fill="#FFD166"/>
+    <circle cx="314" cy="164" r="7" fill="#C9D3E0"/>
+  </g>
+</svg>

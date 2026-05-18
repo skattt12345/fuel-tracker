@@ -34,10 +34,23 @@ body {
 
   /* Підключаємо змінні для фону та тексту */
   background-color: var(--bg-color);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+    url("/assets/fire-rescue-bg.svg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--text-main);
 
   /* Плавний перехід при перемиканні */
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+  background-image:
+    linear-gradient(rgba(14, 18, 24, 0.74), rgba(14, 18, 24, 0.82)),
+    url("/assets/fire-rescue-bg.svg");
 }

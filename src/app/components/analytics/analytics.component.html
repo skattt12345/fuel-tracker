@@ -1,0 +1,94 @@
+<div class="analytics-container">
+  <div class="header-flex">
+    <div class="title-section">
+      <h1>Аналітика пального 🚒</h1>
+      <span class="region-badge">Закарпатська область</span>
+    </div>
+
+    <div class="filters-group">
+      <select
+        [(ngModel)]="selectedMonth"
+        (change)="onFilterChange()"
+        class="filter-select"
+      >
+        <option [value]="-1">📊 Весь рік</option>
+        <option *ngFor="let month of months; let i = index" [value]="i">
+          {{ month }}
+        </option>
+      </select>
+
+      <select
+        [(ngModel)]="selectedYear"
+        (change)="onFilterChange()"
+        class="filter-select"
+      >
+        <option *ngFor="let year of years" [value]="year">
+          {{ year }}
+        </option>
+      </select>
+      <button (click)="exportExcel()" class="btn-export">
+        <span class="icon">📥</span> Excel
+      </button>
+    </div>
+  </div>
+
+  <div class="card chart-card" *ngIf="!loading">
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [type]="barChartType"
+      >
+      </canvas>
+    </div>
+  </div>
+
+  <div class="card table-card" *ngIf="!loading">
+    <div class="table-responsive">
+      <table class="analytics-table">
+        <thead>
+          <tr>
+            <th>Автомобіль</th>
+            <th>Пробіг (км)</th>
+            <th>Факт (л)</th>
+            <th>По нормі (л)</th>
+            <th>Різниця (л)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of vehicles">
+            <td>
+              <div class="name-cell">
+                <span class="vehicle-name">{{ v.name }}</span>
+                <span class="plate-label">{{ v.plate }}</span>
+              </div>
+            </td>
+            <td class="font-mono">
+              {{ getTotalDistance(v) | number: "1.0-0" }}
+            </td>
+            <td class="font-mono">
+              {{ getTotalFuelUsed(v) | number: "1.2-2" }}
+            </td>
+            <td class="text-muted font-mono">
+              {{ getTotalFuelNorm(v) | number: "1.2-2" }}
+            </td>
+            <td
+              [ngClass]="getDifference(v) > 0 ? 'text-danger' : 'text-success'"
+            >
+              <span class="diff-badge" [class.over]="getDifference(v) > 0">
+                <span *ngIf="getDifference(v) > 0">+</span
+                >{{ getDifference(v) | number: "1.2-2" }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loader-box">
+    <div class="spinner"></div>
+    <p>Обробка даних ДСНС...</p>
+  </div>
+</div>

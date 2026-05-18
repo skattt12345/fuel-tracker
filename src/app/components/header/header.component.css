@@ -6,7 +6,7 @@
   z-index: 2000;
   background: var(--card-bg);
   border-bottom: 1px solid var(--border-color);
-  padding: 10px 20px;
+  padding: 14px 20px;
   width: 100%;
 }
 
@@ -15,9 +15,16 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  gap: 20px;
 }
 
 .form-grid {
@@ -36,28 +43,32 @@
 .logo-section {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   cursor: pointer;
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--bg-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  font-size: 22px;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 122, 69, 0.18),
+    rgba(255, 179, 71, 0.1)
+  );
+  border: 1px solid rgba(255, 122, 69, 0.18);
 }
 
 .brand {
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.18rem;
 }
 
 .sub-brand {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: var(--primary-color);
 }
 
@@ -69,21 +80,36 @@
   gap: 10px;
   padding: 0 15px;
   margin-right: clamp(20px, 4.5vw + 8px, 32px);
+  gap: 12px;
+  margin-left: auto;
 }
 
 .add-btn-modern {
   background: var(--primary-color);
   color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 15px 18px;
   border-radius: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   cursor: pointer;
 }
+.btn-confirm-modern {
+  border: none;
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease;
+}
 
+.add-btn-modern:hover,
+.theme-btn:hover,
+.logout-btn:hover,
+.menu-btn:hover {
+  transform: translateY(-1px);
+}
 .controls-group {
   display: flex;
   gap: 6px;
@@ -370,7 +396,7 @@
   }
 
   .add-btn-modern {
-    padding: 8px 12px;
+    padding: 13px 17px;
   }
 }
 

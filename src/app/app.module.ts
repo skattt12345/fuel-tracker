@@ -26,6 +26,8 @@ import { VehicleInfoComponent } from './components/vehicle-info/vehicle-info.com
 import { VehicleAllHistoryComponent } from './components/vehicle-all-history/vehicle-all-history.component';
 import { HistoryTableComponent } from './components/shared/history-table/history-table.component';
 import { InstituteSettingsComponent } from './components/institute-settings/institute-settings.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -40,12 +42,14 @@ import { InstituteSettingsComponent } from './components/institute-settings/inst
     VehicleAllHistoryComponent,
     HistoryTableComponent,
     InstituteSettingsComponent,
+    AnalyticsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule,
 
     // 1. Ініціалізація Firebase App (Новий стиль)
     provideFirebaseApp(() => initializeApp(environment.firebase)),

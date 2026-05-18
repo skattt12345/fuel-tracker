@@ -6,6 +6,7 @@ import { VehicleHistoryComponent } from './components/vehicle-history/vehicle-hi
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthGuard } from './services/Auth/auth.guard';
 import { VehicleAllHistoryComponent } from './components/vehicle-all-history/vehicle-all-history.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 const routes: Routes = [
   { path: 'login', component: AuthComponent }, // Шлях для логіна
@@ -29,6 +30,7 @@ const routes: Routes = [
     path: 'statistics',
     component: VehicleAllHistoryComponent,
   },
+  { path: 'analytics', component: AnalyticsComponent },
   // завжди знизу
   { path: '**', redirectTo: 'login' }, // Якщо шлях невідомий — на логін
 ];

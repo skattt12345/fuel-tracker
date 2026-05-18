@@ -3,9 +3,11 @@
     <div class="logo-section" routerLink="/">
       <div class="logo-icon">⛽</div>
       <div class="logo-text">
-        <span class="brand">FuelTracker</span>
+        <span class="brand-row">
+          <span class="brand">FuelTracker</span>
+        </span>
         <span class="user-name" *ngIf="authService.user$ | async as user">
-          | {{ user.displayName }}
+          {{ user.displayName }}
         </span>
       </div>
     </div>
@@ -25,7 +27,7 @@
           <span class="icon">{{ isDarkMode ? "☀️" : "🌙" }}</span>
         </button>
 
-        <button class="logout-btn" (click)="authService.logout()" title="Вийти">
+        <button class="logout-btn" (click)="logout()" title="Вийти">
           <span class="logout-icon" aria-hidden="true">
             <svg
               viewBox="0 0 24 24"
@@ -60,11 +62,10 @@
 
   <nav class="mobile-nav" [class.show]="isMenuOpen">
     <div class="menu-links">
-      <a routerLink="/" (click)="isMenuOpen = false">🏠 Головна</a>
+      <a routerLink="/" (click)="isMenuOpen = false">Головна</a>
       <a routerLink="/statistics" (click)="closeMenu()">Статистика</a>
-      <a (click)="authService.logout(); isMenuOpen = false" class="logout-link"
-        >🚪 Вийти</a
-      >
+      <a routerLink="/analytics" (click)="isMenuOpen = false">📊 Аналітика</a>
+      <a (click)="logout()" class="logout-link">Вийти</a>
     </div>
   </nav>
 </header>
